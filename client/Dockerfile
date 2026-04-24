@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:18-alpine as builder
 ENV CI=true
 ENV WDS_SOCKET_PORT=0
 WORKDIR /app
