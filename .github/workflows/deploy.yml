@@ -18,3 +18,18 @@ jobs:
       - run: docker push mortiz33/server
       - run: docker push mortiz33/nginx
       - run: docker push mortiz33/worker
+
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v18
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: docker-multi-container-deployment
+          environment_name: docker-multi-container-deployment-env
+          existing_bucket_name: elasticbeanstalk-us-east-1-027576108866
+          region: us-east-1
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
