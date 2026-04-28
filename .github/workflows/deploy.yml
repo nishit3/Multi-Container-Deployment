@@ -10,10 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker build -t mortiz33/multi-client -f client/Dockerfile.dev ./client
-      - run: docker build -t mortiz33/multi-server -f server/Dockerfile.dev ./server
-      - run: docker build -t mortiz33/multi-nginx -f nginx/Dockerfile.dev ./nginx
-      - run: docker build -t mortiz33/multi-worker -f worker/Dockerfile.dev ./worker
+      - run: docker build -t mortiz33/multi-client -f client/Dockerfile ./client
+      - run: docker build -t mortiz33/multi-server -f server/Dockerfile ./server
+      - run: docker build -t mortiz33/multi-nginx -f nginx/Dockerfile ./nginx
+      - run: docker build -t mortiz33/multi-worker -f worker/Dockerfile ./worker
       - run: docker push mortiz33/multi-client
       - run: docker push mortiz33/multi-server
       - run: docker push mortiz33/multi-nginx
